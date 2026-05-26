@@ -33,9 +33,14 @@ steps:
     dotnet test WMS.Tests/WMS.Tests.csproj --configuration $(buildConfiguration) --no-build
   displayName: 'Run Unit Tests'
 
-- script: |
-    dotnet publish WMS.API/WMS.API.csproj --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)
+- task: DotNetCoreCLI@2
   displayName: 'Publish API'
+  inputs:
+    command: publish
+    publishWebProjects: false
+    projects: 'WMS.API/WMS.API.csproj'
+    arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/publish'
+    zipAfterPublish: true
 
 - task: AzureWebApp@1
   displayName: 'Deploy API to Azure App Service'
@@ -43,4 +48,4 @@ steps:
     azureSubscription: '$(azureSubscription)'
     appType: 'webApp'
     appName: '$(webAppName)'
-    package: '$(Build.ArtifactStagingDirectory)'
+    package: '$(Build.ArtifactStagingDirectory)/publish/*.zip'
