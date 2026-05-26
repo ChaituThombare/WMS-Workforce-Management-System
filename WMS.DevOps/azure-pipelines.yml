@@ -15,20 +15,11 @@ steps:
     packageType: 'sdk'
     version: '8.0.x'
 
-- task: NuGetToolInstaller@1
-  displayName: 'Install NuGet'
-
-- task: NuGetCommand@2
+- script: dotnet restore WMS-Solution.slnx
   displayName: 'Restore NuGet packages'
-  inputs:
-    restoreSolution: 'WMS-Solution.slnx'
-
-- task: DotNetCoreCLI@2
+   
+- script: dotnet build WMS-Solution.slnx --configuration $(buildConfiguration)
   displayName: 'Build Solution'
-  inputs:
-    command: 'build'
-    projects: 'WMS-Solution.slnx'
-    arguments: '--configuration $(buildConfiguration)'
 
 - task: DotNetCoreCLI@2
   displayName: 'Run Unit Tests'
