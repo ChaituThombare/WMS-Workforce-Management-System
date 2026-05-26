@@ -9,33 +9,31 @@ variables:
 
 steps:
 
+- checkout: self
+  clean: true
+
 - task: UseDotNet@2
   displayName: 'Install .NET 8 SDK'
   inputs:
-    packageType: 'sdk'
+    packageType: sdk
     version: '8.0.x'
 
-- script: dotnet restore WMS-Solution.slnx
+- script: |
+    dir
+    dotnet restore WMS-Solution.slnx
   displayName: 'Restore NuGet Packages'
 
-- script: dotnet build WMS-Solution.slnx --configuration $(buildConfiguration)
+- script: |
+    dotnet build WMS-Solution.slnx --configuration $(buildConfiguration) --no-restore
   displayName: 'Build Solution'
 
-- task: DotNetCoreCLI@2
+- script: |
+    dotnet test WMS.Tests/WMS.Tests.csproj --configuration $(buildConfiguration) --no-build
   displayName: 'Run Unit Tests'
-  inputs:
-    command: 'test'
-    projects: 'WMS.Tests/WMS.Tests.csproj'
-    arguments: '--configuration $(buildConfiguration) --no-build'
 
-- task: DotNetCoreCLI@2
+- script: |
+    dotnet publish WMS.API/WMS.API.csproj --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)
   displayName: 'Publish API'
-  inputs:
-    command: 'publish'
-    publishWebProjects: false
-    projects: 'WMS.API/WMS.API.csproj'
-    arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
-    zipAfterPublish: true
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Build Artifact'
