@@ -15,17 +15,21 @@ steps:
     packageType: 'sdk'
     version: '8.0.x'
 
-- script: dotnet restore WMS-Solution.slnx
-  displayName: 'Restore NuGet packages'
-   
-- script: dotnet build WMS-Solution.slnx --configuration $(buildConfiguration)
+- script: |
+    cd ..
+    dotnet restore WMS-Solution.slnx
+  displayName: 'Restore NuGet Packages'
+
+- script: |
+    cd ..
+    dotnet build WMS-Solution.slnx --configuration $(buildConfiguration)
   displayName: 'Build Solution'
 
 - task: DotNetCoreCLI@2
   displayName: 'Run Unit Tests'
   inputs:
     command: 'test'
-    projects: 'WMS.Tests/WMS.Tests.csproj'
+    projects: '../WMS.Tests/WMS.Tests.csproj'
     arguments: '--configuration $(buildConfiguration) --no-build'
 
 - task: DotNetCoreCLI@2
@@ -33,7 +37,7 @@ steps:
   inputs:
     command: 'publish'
     publishWebProjects: false
-    projects: 'WMS.API/WMS.API.csproj'
+    projects: '../WMS.API/WMS.API.csproj'
     arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
     zipAfterPublish: true
 
