@@ -20,11 +20,11 @@ steps:
 
 - script: |
     dir
-    dotnet restore WMS-Solution.slnx
+    dotnet restore WMS-Solution.sln
   displayName: 'Restore NuGet Packages'
 
 - script: |
-    dotnet build WMS-Solution.slnx --configuration $(buildConfiguration) --no-restore
+    dotnet build WMS-Solution.sln --configuration $(buildConfiguration) --no-restore
   displayName: 'Build Solution'
 
 - script: |
