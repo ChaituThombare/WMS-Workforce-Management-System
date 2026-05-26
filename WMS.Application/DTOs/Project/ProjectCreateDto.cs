@@ -1,0 +1,21 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace WMS.Application.DTOs.Project
+{
+    public class ProjectCreateDto
+    {
+        public string ProjectName { get; set; } = string.Empty;
+
+        public int? ClientId { get; set; }
+
+        public DateTime? StartDate { get; set; }
+
+        public DateTime? EndDate { get; set; }
+
+        public string Status { get; set; } = "Active";
+    }
+}

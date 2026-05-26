@@ -1,0 +1,15 @@
+D:\My Submission\Capgemini\WMS-Solution\WMS.Application\bin\Debug\net10.0\WMS.Application.deps.json
+D:\My Submission\Capgemini\WMS-Solution\WMS.Application\bin\Debug\net10.0\WMS.Application.dll
+D:\My Submission\Capgemini\WMS-Solution\WMS.Application\bin\Debug\net10.0\WMS.Application.pdb
+D:\My Submission\Capgemini\WMS-Solution\WMS.Application\bin\Debug\net10.0\WMS.Domain.dll
+D:\My Submission\Capgemini\WMS-Solution\WMS.Application\bin\Debug\net10.0\WMS.Domain.pdb
+D:\My Submission\Capgemini\WMS-Solution\WMS.Application\obj\Debug\net10.0\WMS.Application.csproj.AssemblyReference.cache
+D:\My Submission\Capgemini\WMS-Solution\WMS.Application\obj\Debug\net10.0\WMS.Application.GeneratedMSBuildEditorConfig.editorconfig
+D:\My Submission\Capgemini\WMS-Solution\WMS.Application\obj\Debug\net10.0\WMS.Application.AssemblyInfoInputs.cache
+D:\My Submission\Capgemini\WMS-Solution\WMS.Application\obj\Debug\net10.0\WMS.Application.AssemblyInfo.cs
+D:\My Submission\Capgemini\WMS-Solution\WMS.Application\obj\Debug\net10.0\WMS.Application.csproj.CoreCompileInputs.cache
+D:\My Submission\Capgemini\WMS-Solution\WMS.Application\obj\Debug\net10.0\WMS.Appl.21886158.Up2Date
+D:\My Submission\Capgemini\WMS-Solution\WMS.Application\obj\Debug\net10.0\WMS.Application.dll
+D:\My Submission\Capgemini\WMS-Solution\WMS.Application\obj\Debug\net10.0\refint\WMS.Application.dll
+D:\My Submission\Capgemini\WMS-Solution\WMS.Application\obj\Debug\net10.0\WMS.Application.pdb
+D:\My Submission\Capgemini\WMS-Solution\WMS.Application\obj\Debug\net10.0\ref\WMS.Application.dll
