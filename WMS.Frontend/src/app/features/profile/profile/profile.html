@@ -1,0 +1,57 @@
+<h2 class="fw-bold text-dark mb-4">My Profile</h2>
+
+<div class="form-card" *ngIf="employee">
+    <div class="card-body">
+
+        <div class="row g-4">
+
+            <div class="col-md-6">
+                <label class="fw-bold">Full Name</label>
+                <p>{{ employee.firstName }} {{ employee.lastName }}</p>
+            </div>
+
+            <div class="col-md-6">
+                <label class="fw-bold">Email</label>
+                <p>{{ employee.email }}</p>
+            </div>
+
+            <div class="col-md-6">
+                <label class="fw-bold">Phone</label>
+                <p>{{ employee.phoneNumber }}</p>
+            </div>
+
+            <div class="col-md-6">
+                <label class="fw-bold">Gender</label>
+                <p>
+                    {{ employee.gender === 'M' ? 'Male' : employee.gender === 'F' ? 'Female' : 'Other' }}
+                </p>
+            </div>
+
+            <div class="col-md-6">
+                <label class="fw-bold">Department</label>
+                <p>{{ employee.departmentName }}</p>
+            </div>
+
+            <div class="col-md-6">
+                <label class="fw-bold">Role</label>
+                <p>{{ employee.roleName }}</p>
+            </div>
+
+            <div class="col-md-6">
+                <label class="fw-bold">Date of Birth</label>
+                <p>{{ employee.dob | date:'dd-MM-yyyy' }}</p>
+            </div>
+
+            <div class="col-md-6">
+                <label class="fw-bold">Date of Joining</label>
+                <p>{{ employee.doj | date:'dd-MM-yyyy' }}</p>
+            </div>
+
+            <div class="col-md-6">
+                <label class="fw-bold">Status</label>
+                <p>{{ employee.status }}</p>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,82 @@
+<div class="sidebar-container">
+    <h5 class="sidebar-title">Navigation</h5>
+
+    <ul class="nav flex-column">
+
+        <li class="nav-item mb-2">
+            <a routerLink="/dashboard" routerLinkActive="active-link" class="nav-link sidebar-link">
+                Dashboard
+            </a>
+        </li>
+
+        <li class="nav-item mb-2">
+            <a routerLink="/announcements" routerLinkActive="active-link" class="nav-link sidebar-link">
+                Announcements
+            </a>
+        </li>
+        
+        <li class="nav-item mb-2" *ngIf="isEmployee()">
+            <a routerLink="/profile" routerLinkActive="active-link" class="nav-link sidebar-link">
+                My Profile
+            </a>
+        </li>
+
+        <div *ngIf="isAdmin()">
+
+            <li class="nav-item mb-2">
+                <a routerLink="/employees" routerLinkActive="active-link" class="nav-link sidebar-link">
+                    Employees
+                </a>
+            </li>
+
+            <li class="nav-item mb-2">
+                <a routerLink="/departments" routerLinkActive="active-link" class="nav-link sidebar-link">
+                    Departments
+                </a>
+            </li>
+
+            <li class="nav-item mb-2">
+                <a routerLink="/clients" routerLinkActive="active-link" class="nav-link sidebar-link">
+                    Clients
+                </a>
+            </li>
+
+            <li class="nav-item mb-2">
+                <a routerLink="/projects" routerLinkActive="active-link" class="nav-link sidebar-link">
+                    Projects
+                </a>
+            </li>
+
+            <li class="nav-item mb-2">
+                <a routerLink="/allocations" routerLinkActive="active-link" class="nav-link sidebar-link">
+                    Allocations
+                </a>
+            </li>
+
+            <li class="nav-item mb-2">
+                <a routerLink="/audit-logs" routerLinkActive="active-link" class="nav-link sidebar-link">
+                    Audit Logs
+                </a>
+            </li>
+        </div>
+
+        <li class="nav-item mb-2">
+            <a routerLink="/attendance" routerLinkActive="active-link" class="nav-link sidebar-link">
+                Attendance
+            </a>
+        </li>
+
+        <li class="nav-item mb-2" *ngIf="isEmployee()">
+            <a routerLink="/my-projects" routerLinkActive="active-link" class="nav-link sidebar-link">
+                My Projects
+            </a>
+        </li>
+
+        <li class="nav-item mb-2">
+            <a routerLink="/leave" routerLinkActive="active-link" class="nav-link sidebar-link">
+                Leave Management
+            </a>
+        </li>
+
+    </ul>
+</div>

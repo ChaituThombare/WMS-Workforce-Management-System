@@ -1,0 +1,105 @@
+<h2 class="fw-bold text-dark mb-4">Projects</h2>
+
+<div class="form-card">
+    <div class="card-body">
+        <h4 class="mb-4">
+            {{ isEditMode ? 'Edit Project' : 'Add Project' }}
+        </h4>
+
+        <div class="row g-3">
+
+            <div class="col-md-6">
+                <label class="form-label">Project Name</label>
+                <input type="text" class="form-control" [(ngModel)]="projectData.projectName">
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">Client</label>
+                <select class="form-control" [(ngModel)]="projectData.clientId">
+                    <option *ngFor="let client of clients" [value]="client.clientId">
+                        {{ client.clientName }}
+                    </option>
+                </select>
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">Start Date</label>
+                <input type="date" class="form-control" [(ngModel)]="projectData.startDate">
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">End Date</label>
+                <input type="date" class="form-control" [(ngModel)]="projectData.endDate">
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">Status</label>
+                <select class="form-control" [(ngModel)]="projectData.status">
+                    <option value="Active">Active</option>
+                    <option value="Completed">Completed</option>
+                    <option value="On Hold">On Hold</option>
+                </select>
+            </div>
+
+            <div class="col-md-12">
+                <button class="btn btn-primary me-2" (click)="saveProject()">
+                    {{ isEditMode ? 'Update Project' : 'Add Project' }}
+                </button>
+
+                <button *ngIf="isEditMode" class="btn btn-secondary" (click)="cancelEdit()">
+                    Cancel
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-hover align-middle shadow-sm">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Project Name</th>
+                <th>Client</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+    
+        <tbody>
+            <tr *ngFor="let project of projects">
+                <td>{{ project.projectId }}</td>
+                <td>{{ project.projectName }}</td>
+                <td>{{ project.clientName }}</td>
+                <td>{{ project.startDate | date:'dd-MM-yyyy' }}</td>
+                <td>{{ project.endDate | date:'dd-MM-yyyy' }}</td>
+                <td>
+                    <span [ngClass]="{
+                        'badge-active': project.status === 'Active',
+                        'badge-completed': project.status === 'Completed',
+                        'badge-onhold': project.status === 'On Hold'
+                    }">
+                    {{ project.status }}
+                </span>
+                </td>
+                <td>
+                    <button class="btn btn-warning btn-sm me-2" (click)="editProject(project)">
+                        Edit
+                    </button>
+    
+                    <button class="btn btn-danger btn-sm" (click)="deleteProject(project.projectId)">
+                        Delete
+                    </button>
+                </td>
+            </tr>
+            <tr *ngIf="projects.length === 0">
+                <td colspan="7" class="text-center text-muted">
+                    No projects found.
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

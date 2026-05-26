@@ -1,0 +1,85 @@
+<h2 class="fw-bold text-dark mb-4">Project Allocations</h2>
+
+<div class="form-card">
+    <div class="card-body">
+        <h4 class="mb-4">Assign Employee to Project</h4>
+
+        <div class="row g-3">
+            <div class="col-md-4">
+                <label class="form-label">Employee</label>
+                <select class="form-control" [(ngModel)]="allocationData.empId">
+                    <option *ngFor="let emp of employees" [value]="emp.employeeId">
+                    {{ emp.firstName }} {{ emp.lastName }}
+                    </option>
+                </select>
+            </div>
+
+            <div class="col-md-4">
+                <label class="form-label">Project</label>
+                <select class="form-control" [(ngModel)]="allocationData.projectId">
+                    <option *ngFor="let project of projects" [value]="project.projectId">
+                    {{ project.projectName }}
+                    </option>
+                </select>
+            </div>
+
+            <div class="col-md-4">
+                <label class="form-label">Created By</label>
+                <input type="text" class="form-control" [(ngModel)]="allocationData.createdBy">
+            </div>
+
+            <div class="col-md-12">
+                <button class="btn btn-primary" (click)="createAllocation()">
+                Allocate
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-hover align-middle shadow-sm">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Employee</th>
+                <th>Project</th>
+                <th>Assigned On</th>
+                <th>Created By</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+    
+        <tbody>
+            <tr *ngFor="let alloc of allocations">
+                <td>{{ alloc.allocationId }}</td>
+                <td>{{ alloc.employeeName }}</td>
+                <td>{{ alloc.projectName }}</td>
+                <td>{{ alloc.assignedOn | date:'dd-MM-yyyy' }}</td>
+                <td>{{ alloc.createdBy }}</td>
+                <td>
+                    <span
+                    [ngClass]="{
+                        'badge-active': alloc.status === true,
+                        'badge-cancelled': alloc.status === false
+                    }">
+                    {{ alloc.status ? 'Allocated' : 'Deallocated' }}
+                    </span>
+                </td>
+                <td>
+                    <button class="btn btn-danger btn-sm" (click)="deallocate(alloc.allocationId)">
+                        Deallocate
+                    </button>
+                </td>
+            </tr>
+
+            <tr *ngIf="allocations.length === 0">
+                <td colspan="7" class="text-center text-muted">
+                    No records found
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>

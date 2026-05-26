@@ -1,0 +1,119 @@
+<h2 class="fw-bold text-dark mb-4">Dashboard</h2>
+
+<!-- ADMIN / MANAGER DASHBOARD -->
+<div *ngIf="isAdmin()" class="row g-4">
+
+    <div class="col-md-4">
+        <div class="card dashboard-card">
+            <div class="card-body text-center">
+                <h5>Total Employees</h5>
+                <h2>{{ summary.totalEmployees }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card dashboard-card">
+            <div class="card-body text-center">
+                <h5>Total Departments</h5>
+                <h2>{{ summary.totalDepartments }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card dashboard-card">
+            <div class="card-body text-center">
+                <h5>Total Clients</h5>
+                <h2>{{ summary.totalClients }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card dashboard-card">
+            <div class="card-body text-center">
+                <h5>Total Projects</h5>
+                <h2>{{ summary.totalProjects }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card dashboard-card">
+            <div class="card-body text-center">
+                <h5>Active Allocations</h5>
+                <h2>{{ summary.activeAllocations }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card dashboard-card">
+            <div class="card-body text-center">
+                <h5>Pending Leaves</h5>
+                <h2>{{ summary.pendingLeaves }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card dashboard-card">
+            <div class="card-body text-center">
+                <h5>Today's Attendance</h5>
+                <h2>{{ summary.todayAttendance }}</h2>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- EMPLOYEE DASHBOARD -->
+<div *ngIf="isEmployee()" class="row g-4">
+
+    <div class="col-md-6">
+        <div class="card dashboard-card">
+            <div class="card-body text-center">
+                <h5>Welcome</h5>
+                <h2>{{ username }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card dashboard-card">
+            <div class="card-body text-center">
+                <h5>My Role</h5>
+                <h2>{{ authService.getRole() }}</h2>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-md-6">
+        <div class="card dashboard-card">
+            <div class="card-body text-center">
+                <h5>Pending Leaves</h5>
+                <h2>{{ summary.pendingLeaves }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card dashboard-card">
+            <div class="card-body text-center">
+                <h5>Attendance Status</h5>
+                <h2>Active</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card dashboard-card">
+            <div class="card-body text-center">
+                <h5>Active Projects</h5>
+                <h2>{{ summary.totalProjects }}</h2>
+            </div>
+        </div>
+    </div>
+</div>
