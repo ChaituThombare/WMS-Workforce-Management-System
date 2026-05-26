@@ -21,13 +21,13 @@ steps:
 - task: NuGetCommand@2
   displayName: 'Restore NuGet packages'
   inputs:
-    restoreSolution: '**/*.sln'
+    restoreSolution: 'WMS-Solution.slnx'
 
 - task: DotNetCoreCLI@2
   displayName: 'Build Solution'
   inputs:
     command: 'build'
-    projects: '**/*.sln'
+    projects: 'WMS-Solution.slnx'
     arguments: '--configuration $(buildConfiguration)'
 
 - task: DotNetCoreCLI@2
