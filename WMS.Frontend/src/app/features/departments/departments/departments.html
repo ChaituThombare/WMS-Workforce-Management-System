@@ -1,0 +1,76 @@
+<h2 class="fw-bold text-dark mb-4">Departments</h2>
+
+<div class="form-card">
+    <div class="card-body">
+        <h4 class="mb-4">
+            {{ isEditMode ? 'Edit Department' : 'Add Department' }}
+        </h4>
+
+        <div class="row g-3">
+
+            <div class="col-md-6">
+                <label class="form-label">Department Name</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="departmentData.departmentName">
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">Description</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="departmentData.description">
+            </div>
+
+            <div class="col-md-12">
+                <button class="btn btn-primary me-2" (click)="saveDepartment()">
+                    {{ isEditMode ? 'Update Department' : 'Add Department' }}
+                </button>
+
+                <button *ngIf="isEditMode" class="btn btn-secondary" (click)="cancelEdit()">
+                    Cancel
+                </button>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-hover align-middle shadow-sm">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Department Name</th>
+                <th>Description</th>
+                <th>Created On</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+    
+        <tbody>
+            <tr *ngFor="let dept of departments">
+                <td>{{ dept.departmentId }}</td>
+                <td>{{ dept.departmentName }}</td>
+                <td>{{ dept.description }}</td>
+                <td>{{ dept.createdOn | date:'dd-MM-yyyy' }}</td>
+                <td>
+                    <button class="btn btn-warning btn-sm me-2" (click)="editDepartment(dept)">
+                        Edit
+                    </button>
+    
+                    <button class="btn btn-danger btn-sm" (click)="deleteDepartment(dept.departmentId)">
+                        Delete
+                    </button>
+                </td>
+            </tr>
+            <tr *ngIf="departments.length === 0">
+                <td colspan="5" class="text-center text-muted">
+                    No records found
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

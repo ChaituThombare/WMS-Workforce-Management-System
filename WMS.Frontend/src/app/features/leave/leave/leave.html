@@ -1,0 +1,149 @@
+<h2 class="fw-bold text-dark mb-4">Leave Management</h2>
+
+<!-- EMPLOYEE APPLY FORM -->
+<div *ngIf="isEmployee()" class="form-card">
+    <div class="card-body">
+        <h4 class="mb-4">Apply Leave</h4>
+
+        <div class="row g-3">
+
+            <div class="col-md-4">
+                <label class="form-label">Leave Type</label>
+                <select class="form-control" [(ngModel)]="leaveData.leaveType">
+                    <option value="Sick">Sick</option>
+                    <option value="Casual">Casual</option>
+                    <option value="Paid">Paid</option>
+                    <option value="Emergency">Emergency</option>
+                </select>
+            </div>
+
+            <div class="col-md-4">
+                <label class="form-label">Reason</label>
+                <input type="text" class="form-control" [(ngModel)]="leaveData.reason">
+            </div>
+
+            <div class="col-md-4">
+                <label class="form-label">Start Date</label>
+                <input type="date" class="form-control" [(ngModel)]="leaveData.startDate">
+            </div>
+
+            <div class="col-md-4">
+                <label class="form-label">End Date</label>
+                <input type="date" class="form-control" [(ngModel)]="leaveData.endDate">
+            </div>
+
+            <div class="col-md-12">
+                <button class="btn btn-primary" (click)="applyLeave()">
+                    Apply Leave
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- ADMIN CONTROLS -->
+<div *ngIf="isAdmin()" class="form-card">
+    <div class="card-body">
+        <h4 class="mb-4">Leave Administration</h4>
+
+        <div class="row g-3">
+
+            <div class="col-md-4">
+                <label class="form-label">Employee</label>
+                <select class="form-control" [(ngModel)]="leaveData.employeeId">
+                    <option *ngFor="let emp of employees" [value]="emp.employeeId">
+                        {{ emp.firstName }} {{ emp.lastName }}
+                    </option>
+                </select>
+            </div>
+
+            <div class="col-md-12">
+                <button class="btn btn-info me-2" (click)="viewEmployeeLeaves()">
+                    View Employee Leaves
+                </button>
+
+                <button class="btn btn-secondary" (click)="showAllLeaves()">
+                    Show All Leaves
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-hover align-middle shadow-sm">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Employee</th>
+                <th>Leave Type</th>
+                <th>Reason</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Status</th>
+                <th>Applied On</th>
+                <th>Manager Comments</th>
+                <th>Approved By</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+    
+        <tbody>
+            <tr *ngFor="let leave of leaves">
+                <td>{{ leave.leaveRequestId }}</td>
+                <td>{{ leave.employeeName }}</td>
+                <td>{{ leave.leaveType }}</td>
+                <td>{{ leave.reason }}</td>
+                <td>{{ leave.startDate | date:'dd-MM-yyyy' }}</td>
+                <td>{{ leave.endDate | date:'dd-MM-yyyy' }}</td>
+                <td>
+                    <span
+                    [ngClass]="{
+                        'badge-active': leave.status === 'Active',
+                        'badge-pending': leave.status === 'Pending',
+                        'badge-approved': leave.status === 'Approved',
+                        'badge-rejected': leave.status === 'Rejected',
+                        'badge-cancelled': leave.status === 'Cancelled'
+                    }">
+                    {{ leave.status }}
+                    </span>
+                </td>
+                <td>{{ leave.appliedOn | date:'dd-MM-yyyy' }}</td>
+                <td>{{ leave.managerComments || '-' }}</td>
+                <td>{{ leave.approvedBy || '-' }}</td>
+    
+                <td>
+    
+                    <button
+                        *ngIf="isAdmin()"
+                        class="btn btn-success btn-sm me-1"
+                        (click)="approveLeave(leave.leaveRequestId)">
+                        Approve
+                    </button>
+    
+                    <button
+                        *ngIf="isAdmin()"
+                        class="btn btn-warning btn-sm me-1"
+                        (click)="rejectLeave(leave.leaveRequestId)">
+                        Reject
+                    </button>
+    
+                    <button
+                        *ngIf="isEmployee() && leave.status === 'Pending'"
+                        class="btn btn-danger btn-sm"
+                        (click)="cancelLeave(leave.leaveRequestId)">
+                        Cancel
+                    </button>
+    
+                </td>
+            </tr>
+            <tr *ngIf="leaves.length === 0">
+                <td colspan="11" class="text-center text-muted">
+                    No leave records found.
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

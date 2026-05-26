@@ -1,0 +1,111 @@
+<h2 class="fw-bold text-dark mb-4">Attendance Management</h2>
+
+<!-- EMPLOYEE VIEW -->
+<div *ngIf="isEmployee()" class="form-card">
+    <h4>My Attendance</h4>
+
+    <div class="row g-3">
+
+        <div class="col-md-4">
+            <label class="form-label">Work Mode</label>
+            <select class="form-control" [(ngModel)]="checkInData.workMode">
+                <option value="Office">Office</option>
+                <option value="WFH">WFH</option>
+                <option value="Hybrid">Hybrid</option>
+            </select>
+        </div>
+
+        <div class="col-md-8 d-flex align-items-end">
+            <button class="btn btn-success me-2" (click)="doCheckIn()">
+                Check In
+            </button>
+
+            <button class="btn btn-danger" (click)="doCheckOut()">
+                Check Out
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- ADMIN VIEW -->
+<div *ngIf="isAdmin()" class="form-card">
+    <h4>Attendance Monitoring</h4>
+
+    <div class="row g-3">
+
+        <div class="col-md-4">
+            <label class="form-label">Employee</label>
+            <select class="form-control" [(ngModel)]="selectedEmployeeId">
+                <option *ngFor="let emp of employees" [value]="emp.employeeId">
+                    {{ emp.firstName }} {{ emp.lastName }}
+                </option>
+            </select>
+        </div>
+
+        <div class="col-md-8 d-flex align-items-end">
+            <button class="btn btn-info me-2" (click)="viewEmployeeAttendance()">
+                View Employee History
+            </button>
+
+            <button class="btn btn-secondary" (click)="showAllAttendance()">
+                Show All Attendance
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- MONTH FILTER -->
+<div class="form-card mt-4">
+    <h4>Monthly Timesheet</h4>
+
+    <div class="row g-3">
+        <div class="col-md-4">
+            <label class="form-label">Select Month</label>
+            <input
+                type="month"
+                class="form-control"
+                [(ngModel)]="selectedMonth"
+                (change)="applyMonthFilter()">
+        </div>
+
+        <div class="col-md-4 d-flex align-items-end">
+            <div class="alert alert-primary w-100 mb-0">
+                <strong>Total Hours:</strong> {{ totalMonthlyHours }}
+            </div>
+        </div>
+    </div>
+</div>
+
+<table class="table table-bordered table-striped shadow">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Employee</th>
+            <th>Date</th>
+            <th>Check In</th>
+            <th>Check Out</th>
+            <th>Total Hours</th>
+            <th>Work Mode</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let record of filteredAttendanceRecords">
+            <td>{{ record.attendanceId }}</td>
+            <td>{{ record.employeeName }}</td>
+            <td>{{ record.attendanceDate | date:'dd-MM-yyyy' }}</td>
+            <td>{{ record.checkInTime | date:'hh:mm a' }}</td>
+            <td>
+                {{ record.checkOutTime ? (record.checkOutTime | date:'hh:mm a') : 'Not Checked Out' }}
+            </td>
+            <td>{{ record.totalHours }}</td>
+            <td>{{ record.workMode }}</td>
+        </tr>
+
+        <tr *ngIf="filteredAttendanceRecords.length === 0">
+            <td colspan="7" class="text-center text-muted">
+                No attendance records found
+            </td>
+        </tr>
+    </tbody>
+</table>

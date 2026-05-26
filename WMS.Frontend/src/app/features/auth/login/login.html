@@ -1,0 +1,49 @@
+<div class="login-wrapper">
+    <div class="login-card">
+
+        <h2 class="text-center mb-4">WMS Portal Login</h2>
+        <p class="text-center mb-1 text-muted">Workforce Management System</p>
+        
+        <div *ngIf="errorMessage" class="alert alert-danger">
+            {{ errorMessage }}
+        </div>
+
+        <form #loginForm="ngForm" (ngSubmit)="loginForm.form.valid && onLogin()">
+
+            <div class="mb-3">
+                <label class="form-label">Username</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="loginData.username"
+                    name="username"
+                    placeholder="Enter username"
+                    autocomplete="username" 
+                    required>
+            </div>
+
+            <div class="mb-4">
+                <label class="form-label">Password</label>
+                <input
+                    type="password"
+                    class="form-control"
+                    [(ngModel)]="loginData.password"
+                    name="password"
+                    placeholder="Enter password"
+                    autocomplete="current-password" 
+                    required>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100" [disabled]="loginForm.invalid">
+                Login
+            </button>
+            
+        </form>
+
+        <div class="demo-users mt-4 d-flex flex-column gap-1 border-top pt-3">
+            <small class="text-muted"><strong>Demo Access:</strong></small>
+            <small class="text-secondary">🔑 <strong>Admin:</strong> admin / Admin@123</small>
+            <small class="text-secondary">🔑 <strong>Employee:</strong> employee / Employee@123</small>
+        </div>
+    </div>
+</div>

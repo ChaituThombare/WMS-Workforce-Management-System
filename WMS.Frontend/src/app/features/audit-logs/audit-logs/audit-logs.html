@@ -1,0 +1,43 @@
+<h2 class="fw-bold text-dark mb-4">Audit Logs</h2>
+
+<div class="table-responsive">
+    <table class="table table-hover table-bordered shadow-sm">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Entity</th>
+                <th>Record ID</th>
+                <th>Action</th>
+                <th>Created By</th>
+                <th>Created On</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let log of logs">
+                <td>{{ log.auditId }}</td>
+                <td>{{ log.entityName }}</td>
+                <td>{{ log.recordId }}</td>
+                <td>
+                    <span
+                        class="badge px-3 py-2 fs-6 fw-semibold"
+                        [ngClass]="{
+                            'bg-success': log.action === 'Insert',
+                            'bg-warning text-dark': log.action === 'Update',
+                            'bg-danger': log.action === 'Delete'
+                        }">
+                        {{ log.action }}
+                    </span>
+                </td>
+                <td>{{ log.createdBy }}</td>
+                <td>{{ log.createdOn | date:'dd-MM-yyyy hh:mm a' }}</td>
+            </tr>
+
+            <tr *ngIf="logs.length === 0">
+                <td colspan="6" class="text-center text-muted">
+                    No audit logs found
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
