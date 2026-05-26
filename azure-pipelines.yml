@@ -6,6 +6,8 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
+  azureSubscription: 'azure-wms-connection'
+  webAppName: 'wms-sql-chaitanya09'
 
 steps:
 
@@ -35,8 +37,10 @@ steps:
     dotnet publish WMS.API/WMS.API.csproj --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)
   displayName: 'Publish API'
 
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish Build Artifact'
+- task: AzureWebApp@1
+  displayName: 'Deploy API to Azure App Service'
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'wms-api'
+    azureSubscription: '$(azureSubscription)'
+    appType: 'webApp'
+    appName: '$(webAppName)'
+    package: '$(Build.ArtifactStagingDirectory)'
