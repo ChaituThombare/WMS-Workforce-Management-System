@@ -25,10 +25,11 @@ jobs:
   - checkout: self
     clean: true
 
-  - task: NodeTool@0
+  - task: UseNode@1
     displayName: 'Install Node.js'
     inputs:
       versionSpec: '22.x'
+      checkLatest: true
 
   - script: |
       echo "--- Checking Node Version ---"
@@ -47,6 +48,6 @@ jobs:
     inputs:
       app_location: 'WMS.Frontend'
       api_location: ''
-      output_location: 'dist/WMS.Frontend/browser'
+      output_location: 'WMS.Frontend/dist/WMS.Frontend/browser'
       skip_app_build: true
       azure_static_web_apps_api_token: 'b492e8a407db1600d45d5a66c7d8eed66f9b171200f4f593297df7e8d675cfee07-e4bc98da-9e15-4ac4-a222-328b357a05b000007060ca652800'
