@@ -2,6 +2,7 @@ trigger:
   branches:
     include:
       - dev
+
   paths:
     include:
       - WMS.Frontend/*
@@ -24,13 +25,19 @@ jobs:
   - checkout: self
     clean: true
 
-  - task: UseNode@1
+  - task: NodeTool@0
     displayName: 'Install Node.js'
     inputs:
-      versionSpec: '20.x'
+      versionSpec: '22.x'
 
   - script: |
+      echo "--- Checking Node Version ---"
+      node -v
+      npm -v
+      echo "-----------------------------"
+
       cd WMS.Frontend
+
       npm install
       npm run build -- --configuration production
     displayName: 'Install dependencies and build Angular'
@@ -40,6 +47,6 @@ jobs:
     inputs:
       app_location: 'WMS.Frontend'
       api_location: ''
-      output_location: 'dist/wms-frontend/browser'
+      output_location: 'dist/wms.frontend/browser'
       skip_app_build: true
-      azure_static_web_apps_api_token: '6ac1178e2c7b645834602f6aa691d145f832ea358ab09efa6e3099eb4059717107-cb47aa6a-a337-4ceb-a68a-eec938cad62b00007060ca652800'
+      azure_static_web_apps_api_token: 'YOUR_TOKEN'
