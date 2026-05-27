@@ -1,8 +1,20 @@
 trigger:
-- dev
+  branches:
+    include:
+      - dev
+  paths:
+    include:
+      - WMS.API/*
+      - WMS.API/**
+      - WMS.Tests/*
+      - WMS.Tests/**
+      - WMS-Solution.sln
+    exclude:
+      - WMS.Frontend/*
+      - WMS.Frontend/**
 
 pool:
-  vmImage: 'windows-latest'
+  vmImage: 'ubuntu-latest'
 
 variables:
   buildConfiguration: 'Release'
@@ -17,26 +29,23 @@ steps:
 - task: UseDotNet@2
   displayName: 'Install .NET 8 SDK'
   inputs:
-    packageType: sdk
+    packageType: 'sdk'
     version: '8.0.x'
 
-- script: |
-    dir
-    dotnet restore WMS-Solution.sln
+- script: dotnet restore WMS-Solution.sln
   displayName: 'Restore NuGet Packages'
 
-- script: |
-    dotnet build WMS-Solution.sln --configuration $(buildConfiguration) --no-restore
+- script: dotnet build WMS-Solution.sln --configuration $(buildConfiguration) --no-restore
   displayName: 'Build Solution'
 
-- script: |
-    dotnet test WMS.Tests/WMS.Tests.csproj --configuration $(buildConfiguration) --no-build
+- script: dotnet test WMS.Tests/WMS.Tests.csproj --configuration $(buildConfiguration) --no-build --verbosity normal
   displayName: 'Run Unit Tests'
+  condition: succeededOrFailed()
 
 - task: DotNetCoreCLI@2
   displayName: 'Publish API'
   inputs:
-    command: publish
+    command: 'publish'
     publishWebProjects: false
     projects: 'WMS.API/WMS.API.csproj'
     arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/publish'
