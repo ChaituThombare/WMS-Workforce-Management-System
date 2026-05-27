@@ -13,16 +13,21 @@ using Microsoft.AspNetCore.Http;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAngular",
         policy =>
         {
-            policy.WithOrigins("http://localhost:4200", "https://mango-ground-0ca652800.7.azurestaticapps.net")
-                  .AllowAnyHeader()
-                  .AllowAnyMethod();
+            policy.WithOrigins(
+                "http://localhost:4200", 
+                "https://mango-ground-0ca652800.7.azurestaticapps.net"
+                )
+                .AllowAnyHeader()
+                .AllowAnyMethod();
         });
 });
+
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen(options =>
@@ -42,6 +47,7 @@ builder.Services.AddSwaggerGen(options =>
         In = ParameterLocation.Header,
         Description = "Enter JWT Token"
     });
+
     options.AddSecurityRequirement(new OpenApiSecurityRequirement
     {
         {
@@ -99,6 +105,7 @@ builder.Services.AddAuthentication(options =>
         IssuerSigningKey = new SymmetricSecurityKey(key)
     };
 });
+
 builder.Services.AddAuthorization();
 
 var app = builder.Build();
@@ -110,8 +117,9 @@ app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseHttpsRedirection();
 
-app.UseAuthentication();
 app.UseCors("AllowAngular");
+
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
