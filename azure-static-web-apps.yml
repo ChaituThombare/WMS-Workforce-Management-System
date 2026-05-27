@@ -25,11 +25,10 @@ jobs:
   - checkout: self
     clean: true
 
-  - task: UseNode@1
+  - task: NodeTool@0
     displayName: 'Install Node.js'
     inputs:
       versionSpec: '22.x'
-      checkLatest: true
 
   - script: |
       echo "--- Checking Node Version ---"
