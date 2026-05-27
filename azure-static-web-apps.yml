@@ -47,6 +47,6 @@ jobs:
     inputs:
       app_location: 'WMS.Frontend'
       api_location: ''
-      output_location: 'dist/wms.Frontend/browser'
+      output_location: 'dist/WMS.Frontend/browser'
       skip_app_build: true
       azure_static_web_apps_api_token: 'b492e8a407db1600d45d5a66c7d8eed66f9b171200f4f593297df7e8d675cfee07-e4bc98da-9e15-4ac4-a222-328b357a05b000007060ca652800'
