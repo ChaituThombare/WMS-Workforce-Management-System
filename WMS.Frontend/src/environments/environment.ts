@@ -1,4 +1,4 @@
 export const environment = {
     production: false,
-    apiUrl: 'http://localhost:5112/api'
+    apiUrl: 'https://wms-sql-chaitanya09-d3g9eje9g2g2a9f0.centralindia-01.azurewebsites.net/api'
 }

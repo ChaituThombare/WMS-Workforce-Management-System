@@ -1,0 +1,30 @@
+trigger:
+- dev
+
+pool:
+  vmImage: ubuntu-latest
+
+jobs:
+- job: build_and_deploy
+  displayName: Build and Deploy Angular App
+  steps:
+
+  - checkout: self
+
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '20.x'
+    displayName: Install Node.js
+
+  - script: |
+      cd WMS.Frontend
+      npm install
+      npm run build
+    displayName: Install dependencies and build Angular
+
+  - task: AzureStaticWebApp@0
+    inputs:
+      app_location: 'WMS.Frontend'
+      output_location: 'dist/WMS.Frontend/browser'
+      skip_app_build: true
+      azure_static_web_apps_api_token: '6ac1178e2c7b645834602f6aa691d145f832ea358ab09efa6e3099eb4059717107-cb47aa6a-a337-4ceb-a68a-eec938cad62b00007060ca652800'
