@@ -43,7 +43,7 @@ namespace WMS.Infrastructure.Services
                 TodayAttendance = await _context.Attendances
                     .CountAsync(a => a.AttendanceDate == today),
 
-                EmployeesOnLeave = await _context.LeaveRequests.CountAsync(l => l.Status == "Approved" && l.StartDate <= today && l.EndDate >= today)
+                EmployeesOnLeave = await _context.LeaveRequests.CountAsync(l => l.Status == "Approved" && l.StartDate.Date <= today && l.EndDate.Date >= today)
             };
 
             // EMPLOYEE SPECIFIC METRICS
