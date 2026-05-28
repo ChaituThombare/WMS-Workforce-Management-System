@@ -1,118 +1,465 @@
-.table {
-    border-radius: 12px;
-    overflow: hidden;
-    background: white;
+/* ============================================================
+   WMS · WORKFORCE MANAGEMENT SYSTEM
+   Enterprise Core UI Design System (Stretching & Contrast Fixed)
+   
+   Author  : Chaitanya Murlidhar Thombare
+   Version : 3.0.0
+   ============================================================ */
+
+:root {
+    /* Premium Unified Palette */
+    --primary: #6366f1;           /* Vibrant Indigo Accent */
+    --primary-gradient: linear-gradient(135deg, #4f46e5, #818cf8);
+    
+    /* Contrast Separated Backgrounds */
+    --navbar-bg: linear-gradient(90deg, #1e293b 0%, #334155 100%);  /* Slate Command Topbar */
+    --sidebar-bg: #111827;        /* Pure Obsidian Deep Sidebar */
+    --surface-base: #f1f5f9;      /* Ultra Clean Ice-Grey Canvas */
+    --surface-card: #ffffff;      /* Pristine White for Content Blocks */
+    
+    /* Semantic Status Colors */
+    --success: #10b981;          /* Neon Mint Emerald */
+    --success-lt: #d1fae5;
+    --warning: #f59e0b;          /* Vivid Amber */
+    --warning-lt: #fef3c7;
+    --danger: #ff0055;           /* Crimson Sharp Alert */
+    --danger-lt: #ffe4e6;
+    --info: #06b6d4;             /* Cyber Cyan */
+    --info-lt: #ecfeff;
+
+    /* Typography Contrast Levels */
+    --text-dark: #0f172a;         /* High Contrast Headings */
+    --text-body: #334155;         /* Readable Grid Data */
+    --text-muted: #64748b;        /* Subtext Slate */
+
+    /* Design Accents */
+    --border-light: #e2e8f0;
+    --shadow-md: 0 10px 25px -5px rgba(15, 23, 42, 0.05), 0 8px 10px -6px rgba(15, 23, 42, 0.03);
+    --shadow-lg: 0 20px 35px -10px rgba(15, 23, 42, 0.1);
+    
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-full: 999px;
+    --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.table thead {
-    background: #1e293b;
-    color: white;
+/* ============================================================
+   01 · RESET & APP LAYOUT SHELL (Crucial for Sidebar Stretch)
+   ============================================================ */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0; padding: 0;
 }
 
-.table tbody tr:hover {
-    background: #f8fafc;
+body {
+    background: var(--surface-base);
+    overflow-x: hidden;
+    color: var(--text-body);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
 }
 
-.table-responsive {
-    border-radius: 12px;
+/* 🚀 The Infinite Height Stretch Fix Structure */
+.app-shell {
+    display: flex;
+    min-height: 100vh;
+    background: var(--surface-base);
+    
 }
 
-.badge-active {
-    background: #16a34a;
-    color: white;
-    padding: 6px 10px;
-    border-radius: 8px;
-    font-size: 0.85rem;
+.main-area {
+    flex: 1;
+    background: var(--surface-base);
 }
 
-.badge-inactive {
-    background: #94a3b8;
-    color: white;
-    padding: 6px 10px;
-    border-radius: 8px;
-    font-size: 0.85rem;
+.main-content {
+    margin-left: 260px;
+    margin-top: 70px;
+
+    padding: 32px;
+
+    min-height: calc(100vh - 70px);
+
+    background: var(--surface-base);
 }
 
-.badge-pending {
-    background: #eab308;
-    color: white;
-    padding: 6px 10px;
-    border-radius: 8px;
-}
-
-.badge-approved {
-    background: #2563eb;
-    color: white;
-    padding: 6px 10px;
-    border-radius: 8px;
-}
-
-.badge-rejected {
-    background: #dc2626;
-    color: white;
-    padding: 6px 10px;
-    border-radius: 8px;
-}
-
-.badge-cancelled {
-    background: #64748b;
-    color: white;
-    padding: 6px 10px;
-    border-radius: 8px;
-}
-
-.badge-completed {
-    background: #0ea5e9;
-    color: white;
-    padding: 6px 10px;
-    border-radius: 8px;
-    font-size: 0.85rem;
-}
-
-.badge-onhold {
-    background: #f97316;
-    color: white;
-    padding: 6px 10px;
-    border-radius: 8px;
-    font-size: 0.85rem;
-}
-
-.btn {
-    border-radius: 10px !important;
-    font-weight: 600;
-    padding: 8px 16px;
-}
-
-/* form */
-
-.form-card {
-    background: white;
-    border-radius: 16px;
+/* ============================================================
+   02 · LOGIN PAGE (Polished & Professional Light-Dark Mix)
+   ============================================================ */
+.login-wrapper {
+    min-height: 100vh;
+    background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 24px;
-    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+}
+
+.login-card {
+    width: 100%;
+    max-width: 440px;
+    background: var(--surface-card);
+    padding: 40px;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.brand-section {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.brand-section h1 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    background: linear-gradient(90deg, #4f46e5, #ff0055);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 8px;
+}
+
+/* ============================================================
+   03 · CORE LAYOUT — NAVBAR & SIDEBAR (Contrast Separation)
+   ============================================================ */
+/* ── Top Header Navigation ── */
+.custom-navbar {
+    background: var(--navbar-bg);
+
+    height: 70px;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    z-index: 1100;
+
+    box-shadow: 0 4px 20px rgba(15, 23, 42, 0.15);
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 32px;
+}
+
+.navbar-brand {
+    color: #ffffff !important;
+    font-size: 1.3rem;
+    font-weight: 800;
+    letter-spacing: 0.03em;
+}
+
+
+.portal-subtitle {
+    color: #a5b4fc; /* High contrast vibrant soft indigo */
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+/* ── Left Sidebar (Perfect Dynamic Stretching Config) ── */
+.sidebar-container {
+    width: 260px;
+
+    position: fixed;
+
+    top: 70px; /* navbar height */
+    left: 0;
+    bottom: 0;
+
+    overflow-y: auto;
+
+    background: var(--sidebar-bg);
+
+    padding: 24px 16px;
+
+    box-shadow: 6px 0 25px rgba(0, 0, 0, 0.15);
+
+    z-index: 1000;
+}
+
+/* 🚨 FIXED: 'MENU' heading now strikingly visible */
+.sidebar-title {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: #94a3b8; /* Crisp metallic contrast tint */
+    font-weight: 700;
+    margin-bottom: 16px;
+    padding-left: 12px;
+    opacity: 0.95;
+}
+
+.sidebar-link {
+    color: #9ca3af;
+    padding: 14px 16px;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: var(--transition);
+    text-decoration: none;
+    margin-bottom: 6px;
+}
+
+.sidebar-link:hover:not(.active-link) {
+    background: rgba(255, 255, 255, 0.05);
+    color: #ffffff;
+    transform: translateX(4px);
+}
+
+.active-link {
+    background: var(--primary-gradient);
+    color: #ffffff !important;
+    box-shadow: 0 8px 16px -4px rgba(99, 102, 241, 0.4);
+}
+
+/* ============================================================
+   04 · METRIC CARDS & ANALYTICS
+   ============================================================ */
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+    margin-bottom: 32px;
+}
+
+.dashboard-card {
+    border: none;
+    border-radius: var(--radius-lg);
+    background: var(--surface-card);
+    box-shadow: var(--shadow-md);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--border-light);
+    padding: 24px;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Elegant left border pip identifier */
+.dashboard-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; bottom: 0;
+    width: 5px;
+    background: var(--primary);
+}
+
+.dashboard-card h5 {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.dashboard-card h2 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--text-dark);
+}
+
+/* Contextual Accent Assigners */
+.employee-card::before { background: var(--info); }
+.project-card::before { background: var(--success); }
+.leave-card::before { background: var(--warning); }
+.danger-card::before { background: var(--danger); }
+
+/* ============================================================
+   05 · CHARTS CONTAINER & PANELS
+   ============================================================ */
+.dashboard-chart-card {
+    border: none;
+    border-radius: var(--radius-lg);
+    background: var(--surface-card);
+    box-shadow: var(--shadow-md);
+    padding: 24px;
+    border: 1px solid var(--border-light);
+}
+
+.dashboard-chart-card h5 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    border-bottom: 2px solid var(--surface-base);
+    padding-bottom: 12px;
     margin-bottom: 24px;
 }
 
-.form-card h4 {
+canvas {
+    width: 100% !important;
+    max-height: 320px !important;
+}
+
+/* ============================================================
+   06 · UI COMPONENTS (BUTTONS, BADGES, TABLES)
+   ============================================================ */
+.btn {
+    border-radius: var(--radius-sm) !important;
     font-weight: 700;
-    color: #1e293b;
-    margin-bottom: 20px;
+    padding: 10px 24px;
+    transition: var(--transition);
 }
 
-.form-label {
+.btn-primary {
+    background: var(--primary-gradient);
+    border: none;
+    box-shadow: 0 4px 14px rgba(99, 102, 241, 0.2);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.35);
+}
+
+.logout-btn {
+    background: rgba(255, 0, 85, 0.08);
+    color: var(--danger);
+    border: 1px solid rgba(255, 0, 85, 0.15);
+}
+
+.logout-btn:hover {
+    background: var(--grad-danger);
+    color: white;
+}
+
+/* ── DATA GRID TABLES ── */
+.table-responsive {
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border-light);
+    overflow: hidden;
+}
+
+.table {
+    margin-bottom: 0;
+    background: var(--surface-card);
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table thead {
+    background: #1e293b; /* Premium slate header row */
+}
+
+.table thead th {
+    color: #ffffff;
     font-weight: 600;
-    color: #334155;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+    padding: 18px 20px;
+    border: none;
+    white-space: nowrap;
 }
 
-.form-control,
-.form-select {
-    border-radius: 10px;
-    padding: 10px;
+.table tbody td {
+    padding: 22px 20px;
+    vertical-align: middle;
+    color: var(--text-body);
+    font-weight: 500;
+    border-bottom: 1px solid var(--surface-base);
+}
+
+.table tbody tr:hover {
+    background-color: #f8fafc !important;
+}
+
+.table .btn {
+    min-width: 110px;
+    margin-bottom: 8px;
+}
+
+
+.btn-success {
+    background: #16a34a;
+    border: none;
+}
+
+.btn-warning {
+    background: #f59e0b;
+    border: none;
+    color: white;
+}
+
+.btn-danger {
+    background: #dc2626;
+    border: none;
+}
+
+/* ── MODERN STATUS PILLS ── */
+.badge-active, .badge-approved, .badge-completed {
+    background: var(--success-lt); color: #047857;
+}
+.badge-pending, .badge-onhold {
+    background: var(--warning-lt); color: #b45309;
+}
+.badge-rejected {
+    background: var(--danger-lt); color: var(--danger);
+}
+.badge-cancelled, .badge-inactive {
+    background: #e2e8f0; color: #475569;
+}
+
+.badge-active, .badge-inactive, .badge-pending, .badge-approved, 
+.badge-rejected, .badge-cancelled, .badge-completed, .badge-onhold {
+    padding: 6px 14px;
+    border-radius: var(--radius-full);
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+/* ============================================================
+   07 · FORMS & INPUTS
+   ============================================================ */
+.form-card {
+    background: var(--surface-card);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border-light);
+}
+
+.form-control, .form-select {
+    border-radius: var(--radius-sm);
+    padding: 12px 16px;
     border: 1px solid #cbd5e1;
+    background-color: #f8fafc;
+    color: var(--text-dark);
 }
 
-.form-control:focus,
-.form-select:focus {
-    box-shadow: 0 0 0 0.15rem rgba(37, 99, 235, 0.2);
-    border-color: #2563eb;
+.form-control:focus, .form-select:focus {
+    background-color: #ffffff;
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.12);
+    border-color: var(--primary);
+    outline: none;
+}
+
+/* ============================================================
+   08 · RESPONSIVE INTERFACES
+   ============================================================ */
+@media (max-width: 768px) {
+    .app-shell { flex-direction: column; }
+    
+    .sidebar-container {
+        width: 100%;
+        min-height: auto;
+        padding: 16px;
+    }
+
+    .sidebar-link:hover:not(.active-link) { transform: none; }
+    .dashboard-card h2 { font-size: 1.9rem; }
 }

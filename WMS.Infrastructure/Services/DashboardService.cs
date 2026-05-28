@@ -17,19 +17,22 @@ namespace WMS.Infrastructure.Services
             _context = context;
         }
 
-        public async Task<DashboardSummaryDto> GetSummaryAsync()
+        public async Task<DashboardSummaryDto> GetSummaryAsync(string role, int? employeeId)
         {
             var today = DateTime.Now.Date;
 
-            return new DashboardSummaryDto
+            var response = new DashboardSummaryDto
             {
+                // ADMIN METRICS
                 TotalEmployees = await _context.Employees.CountAsync(),
 
-                TotalDepartments = await _context.Departments.CountAsync(),
-
-                TotalClients = await _context.Clients.CountAsync(),
+                ActiveEmployees = await _context.Employees
+                    .CountAsync(e => e.Status == "Active"),
 
                 TotalProjects = await _context.Projects.CountAsync(),
+
+                ActiveProjects = await _context.Projects
+                    .CountAsync(p => p.Status == "Active"),
 
                 ActiveAllocations = await _context.EmployeeProjectAllocations
                     .CountAsync(a => a.Status == true),
@@ -38,8 +41,36 @@ namespace WMS.Infrastructure.Services
                     .CountAsync(l => l.Status == "Pending"),
 
                 TodayAttendance = await _context.Attendances
-                    .CountAsync(a => a.AttendanceDate == today)
+                    .CountAsync(a => a.AttendanceDate == today),
+
+                EmployeesOnLeave = await _context.LeaveRequests.CountAsync(l => l.Status == "Approved" && l.StartDate <= today && l.EndDate >= today)
             };
+
+            // EMPLOYEE SPECIFIC METRICS
+            if (role == "Employee" && employeeId.HasValue)
+            {
+                response.MyProjects = await _context.EmployeeProjectAllocations
+                    .CountAsync(a =>
+                        a.EmpId == employeeId.Value &&
+                        a.Status == true);
+
+                response.MyPendingLeaves = await _context.LeaveRequests
+                    .CountAsync(l =>
+                        l.EmployeeId == employeeId.Value &&
+                        l.Status == "Pending");
+
+                response.MyAttendanceCount = await _context.Attendances
+                    .CountAsync(a =>
+                        a.EmployeeId == employeeId.Value);
+
+                var avgHours = await _context.Attendances
+                    .Where(a => a.EmployeeId == employeeId.Value)
+                    .AverageAsync(a => (double?)a.TotalHours);
+
+                response.MyAverageHours = Math.Round(avgHours ?? 0, 2);
+            }
+
+            return response;
         }
     }
 }

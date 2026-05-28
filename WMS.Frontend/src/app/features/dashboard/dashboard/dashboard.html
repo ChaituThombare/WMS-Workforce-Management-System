@@ -1,9 +1,12 @@
-<h2 class="fw-bold text-dark mb-4">Dashboard</h2>
+<h2 class="fw-bold text-dark mb-4">
+    Dashboard
+</h2>
 
-<!-- ADMIN / MANAGER DASHBOARD -->
+<!-- ADMIN DASHBOARD -->
+
 <div *ngIf="isAdmin()" class="row g-4">
 
-    <div class="col-md-4">
+    <div class="col-md-3">
         <div class="card dashboard-card">
             <div class="card-body text-center">
                 <h5>Total Employees</h5>
@@ -12,25 +15,7 @@
         </div>
     </div>
 
-    <div class="col-md-4">
-        <div class="card dashboard-card">
-            <div class="card-body text-center">
-                <h5>Total Departments</h5>
-                <h2>{{ summary.totalDepartments }}</h2>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-4">
-        <div class="card dashboard-card">
-            <div class="card-body text-center">
-                <h5>Total Clients</h5>
-                <h2>{{ summary.totalClients }}</h2>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-4">
+    <div class="col-md-3">
         <div class="card dashboard-card">
             <div class="card-body text-center">
                 <h5>Total Projects</h5>
@@ -66,13 +51,53 @@
         </div>
     </div>
 
+    <!-- BAR CHART -->
+
+    <div class="col-md-8">
+        <div class="card dashboard-chart-card">
+            <div class="card-body">
+                <h5 class="mb-3">
+                    Workforce Analytics
+                </h5>
+
+                <canvas
+                    baseChart
+                    #barChart
+                    [data]="adminBarChartData"
+                    [options]="adminBarChartOptions"
+                    [type]="'bar'">
+                </canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- PIE CHART -->
+
+    <div class="col-md-4">
+        <div class="card dashboard-chart-card">
+            <div class="card-body">
+                <h5 class="mb-3">
+                    Leave & Resource Status
+                </h5>
+
+                <canvas
+                    baseChart
+                    #pieChart
+                    [data]="adminPieChartData"
+                    [type]="adminPieChartType">
+                </canvas>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 <!-- EMPLOYEE DASHBOARD -->
+
 <div *ngIf="isEmployee()" class="row g-4">
 
     <div class="col-md-6">
-        <div class="card dashboard-card">
+        <div class="card dashboard-card employee-card">
             <div class="card-body text-center">
                 <h5>Welcome</h5>
                 <h2>{{ username }}</h2>
@@ -81,7 +106,7 @@
     </div>
 
     <div class="col-md-6">
-        <div class="card dashboard-card">
+        <div class="card dashboard-card employee-card">
             <div class="card-body text-center">
                 <h5>My Role</h5>
                 <h2>{{ authService.getRole() }}</h2>
@@ -89,31 +114,42 @@
         </div>
     </div>
 
+    <div class="col-md-4">
+        <div class="card dashboard-card">
+            <div class="card-body text-center">
+                <h5>My Projects</h5>
+                <h2>{{ summary.myProjects }}</h2>
+            </div>
+        </div>
+    </div>
 
-    <div class="col-md-6">
+    <div class="col-md-4">
         <div class="card dashboard-card">
             <div class="card-body text-center">
                 <h5>Pending Leaves</h5>
-                <h2>{{ summary.pendingLeaves }}</h2>
+                <h2>{{ summary.myPendingLeaves }}</h2>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    <div class="col-md-4">
+        <div class="card dashboard-card">
+            <div class="card-body text-center">
+                <h5>Attendance Records</h5>
+                <h2>{{ summary.myAttendanceCount }}</h2>
             </div>
         </div>
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-12">
         <div class="card dashboard-card">
             <div class="card-body text-center">
-                <h5>Attendance Status</h5>
-                <h2>Active</h2>
+                <h5>Average Working Hours</h5>
+                <h2>{{ summary.myAverageHours }} hrs</h2>
             </div>
         </div>
     </div>
 
-    <div class="col-md-6">
-        <div class="card dashboard-card">
-            <div class="card-body text-center">
-                <h5>Active Projects</h5>
-                <h2>{{ summary.totalProjects }}</h2>
-            </div>
-        </div>
-    </div>
 </div>

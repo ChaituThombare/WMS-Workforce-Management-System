@@ -24,6 +24,7 @@ import { Profile } from './features/profile/profile/profile';
 import { MyProjects } from './features/my-projects/my-projects/my-projects';
 import { Announcements } from './features/announcements/announcements/announcements';
 import { AuditLogs } from './features/audit-logs/audit-logs/audit-logs';
+import { BaseChartDirective, provideCharts, withDefaultRegisterables } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -45,9 +46,11 @@ import { AuditLogs } from './features/audit-logs/audit-logs/audit-logs';
     Announcements,
     AuditLogs,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule, BaseChartDirective],
+
   providers: [
     provideBrowserGlobalErrorListeners(),
+    provideCharts(withDefaultRegisterables()),
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

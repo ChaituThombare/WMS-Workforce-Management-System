@@ -1,26 +1,78 @@
-.dashboard-card {
+/* .dashboard-card {
     border: none;
     border-radius: 18px;
-    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
-    transition: 0.3s;
+    background: linear-gradient(135deg, #ffffff, #f4f7ff);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    transition: all 0.25s ease;
+    overflow: hidden;
+    height: 100%;
 }
 
 .dashboard-card:hover {
     transform: translateY(-6px);
-    box-shadow: 0 18px 35px rgba(15, 23, 42, 0.15);
+    box-shadow: 0 10px 22px rgba(37, 99, 235, 0.18);
 }
 
 .dashboard-card .card-body {
-    padding: 30px;
+    padding: 28px;
 }
 
 .dashboard-card h5 {
-    color: #64748b;
+    color: #6b7280;
+    font-size: 1rem;
     font-weight: 600;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
 }
 
 .dashboard-card h2 {
-    color: #1e293b;
     font-weight: 700;
+    font-size: 2.2rem;
+    color: #2563eb;
+    margin: 0;
 }
+
+.dashboard-chart-card {
+    border: none;
+    border-radius: 18px;
+    background: #ffffff;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    padding: 18px;
+    height: 100%;
+    transition: all 0.25s ease;
+}
+
+.dashboard-chart-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.10);
+}
+
+.dashboard-chart-card h5 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 20px;
+}
+
+.employee-card {
+    background: linear-gradient(135deg, #eff6ff, #dbeafe);
+}
+
+canvas {
+    width: 100% !important;
+    max-height: 340px !important;
+}
+
+@media (max-width: 768px) {
+
+    .dashboard-card h2 {
+        font-size: 1.8rem;
+    }
+
+    .dashboard-chart-card {
+        padding: 14px;
+    }
+
+    canvas {
+        max-height: 260px !important;
+    }
+} */

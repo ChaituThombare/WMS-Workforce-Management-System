@@ -17,10 +17,25 @@ namespace WMS.API.Controllers
         }
 
         [HttpGet("summary")]
-        [Authorize(Roles = "Admin")]
+        [Authorize]
         public async Task<IActionResult> GetSummary()
         {
-            return Ok(await _dashboardService.GetSummaryAsync());
+            var role = User.FindFirst(System.Security.Claims.ClaimTypes.Role)?.Value;
+
+            var employeeIdClaim = User.FindFirst
+                ("EmployeeId")?.Value;
+
+            int? employeeId = null;
+
+            if (!string.IsNullOrEmpty(employeeIdClaim))
+            {
+                employeeId = int.Parse(employeeIdClaim);
+            }
+
+            var result = await _dashboardService
+                .GetSummaryAsync(role!, employeeId);
+
+            return Ok(result);
         }
     }
 }

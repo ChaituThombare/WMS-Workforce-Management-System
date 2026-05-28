@@ -5,6 +5,6 @@ namespace WMS.Application.Interfaces
 {
     public interface IDashboardService
     {
-        Task<DashboardSummaryDto> GetSummaryAsync();
+        Task<DashboardSummaryDto> GetSummaryAsync(string role, int? emloyeeId);
     }
 }
