@@ -1,4 +1,4 @@
-import { Component, inject, ChangeDetectorRef, OnInit, ViewChild } from '@angular/core';
+import { Component, inject, ChangeDetectorRef, OnInit, ViewChild, NgZone } from '@angular/core';
 import { DashboardService } from '../../../core/services/dashboard.service';
 import { DashboardSummary } from '../../../core/models/dashboard-summary';
 import { AuthService } from '../../../core/services/auth.service';
@@ -14,10 +14,11 @@ import { BaseChartDirective } from 'ng2-charts';
 export class Dashboard implements OnInit {
   private dashboardService = inject(DashboardService);
   private cdr = inject(ChangeDetectorRef);
+  private ngZone = inject(NgZone);
   authService = inject(AuthService);
 
-  // @ViewChild('barChart') barChart?: BaseChartDirective;
-  // @ViewChild('pieChart') pieChart?: BaseChartDirective;
+  @ViewChild('barChart') barChart?: BaseChartDirective;
+  @ViewChild('pieChart') pieChart?: BaseChartDirective;
 
   username = localStorage.getItem('fullName') || 'User';
 
@@ -133,10 +134,12 @@ export class Dashboard implements OnInit {
 
         this.cdr.detectChanges();
 
-        // setTimeout(() => {
-        //   this.barChart?.update();
-        //   this.pieChart?.update();
-        // });
+        this.ngZone.runOutsideAngular(() => {
+          setTimeout(() => {
+            this.barChart?.chart?.update();
+            this.pieChart?.chart?.update();
+          }, 300);
+        });
       },
       error: (err) => {
         console.error('Dashboard API Error:', err);
